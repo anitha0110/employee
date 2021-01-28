@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <script src="https://code.jquery.com/jquery-git.js"></script>
+
+    <title>JavaScript Table Filter Search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        h3 span {
+            font-size: 22px;
+        }
+        h3 input.search-input {
+            width: 300px;
+            margin-left: auto;
+            float: right
+        }
+        .mt32 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="mt32">
+
+    <div class="container-fluid">
+        <h4>Employee Details (&lt; total_no_of_employees &gt;)</h4>
+        <hr class="hr-primary" />
+      </div>
+    <div class="container">
+        <h3>
+            <!-- <span>JavaScript Filter Table Data</span> -->
+            <button class="btn pull-right" type="button" data-toggle="dropdown" style="margin-right:45px";>
+                <!-- <span class="caret"></span></button> -->
+                <!-- <ul class="dropdown-menu">
+                  <li><a href="#">HTML</a></li>
+                  <li><a href="#">CSS</a></li>
+                  <li><a href="#">JavaScript</a></li>
+                </ul>  -->
+
+                <select name="department" id="depart" style="margin-right:45px";>
+                    <option value="computer">computer</option>
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">chemistry</option>
+                  </select>
+            <input type="search" placeholder="name/email..." class="search-input" data-table="customers-list"/>
+        <button  style="size: 5px";>search</button>
+        <button >reset/reload</button>
+
+            
+        </h3>
+        <table class="table table-striped mt32 customers-list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>email</th>
+                    <th>age</th>
+                    <th>department</th>
+                </tr>
+            </thead>
+            
+                <tr>
+                    <td>Ana Trujillo</td>
+                    <td>Ana.trujillo@gmail.com</td>
+                    <td>50</td>
+                    <td>computer</td>
+                </tr>
+                <tr>
+                    <td>Antonio Moreno</td>
+                    <td>antoniomoreno2@gmail.com</td>
+                    <td>20</td>
+                    <td>physics</td>
+                </tr>
+                <tr>
+                    <td>Maria Anders</td>
+                    <td>mariaanders@yahoo.com</td>
+                    <td>70</td>
+                    <td>chemistry</td>
+                </tr>
+                <tr>
+                    <td>Thomas Hardy</td>
+                    <td>hardythomas.90@gmail.com</td>
+                    <td>40</td>
+                    <td>physics</td>
+                </tr>
+                <tr>
+                    <td>Christina Berglund</td>
+                    <td>christina@outlook.com</td>
+                    <td>90</td>
+                    <td>computer</td>
+                </tr>
+                <tr>
+                    
+                    <td>Davolio Nancy</td>
+                    <td>nancy.davolio@gmail.com</td>
+                    <td>25</td>
+                    <td>India</td>
+                </tr>
+            
+            
+        </table>
+    </div>
+    <script>
+        (function(document) {
+            'use strict';
+
+            var TableFilter = (function(myArray) {
+                var search_input;
+
+                function _onInputSearch(e) {
+                    search_input = e.target;
+                    var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
+                    myArray.forEach.call(tables, function(table) {
+                        myArray.forEach.call(table.tBodies, function(tbody) {
+                            myArray.forEach.call(tbody.rows, function(row) {
+                                var text_content = row.textContent.toLowerCase();
+                                var search_val = search_input.value.toLowerCase();
+                                row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
+                            });
+                        });
+                    });
+                }
+
+                return {
+                    init: function() {
+                        var inputs = document.getElementsByClassName('search-input');
+                        myArray.forEach.call(inputs, function(input) {
+                            input.oninput = _onInputSearch;
+                        });
+                    }
+                };
+            })(Array.prototype);
+
+            document.addEventListener('readystatechange', function() {
+                if (document.readyState === 'complete') {
+                    TableFilter.init();
+                }
+            });
+
+        })(document);
+
+        $.fn.rowCount = function() {
+    return $('tr', $(this).find('tbody')).length;
+};
+
+$.fn.columnCount = function() {
+    return $('th', $(this).find('tbody')).length;
+};
+var
+
+rowctr = $(".mt32").rowCount();
+var colctr = $(".mt32").columnCount();
+
+console.log('No of Rows:'+rowctr);
+console.log('No of Columns:'+colctr);
+
+    </script>
+</body>
+</html>
